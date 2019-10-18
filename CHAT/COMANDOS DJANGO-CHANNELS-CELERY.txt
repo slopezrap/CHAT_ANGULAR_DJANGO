@@ -1,0 +1,54 @@
+--------------------- INSTALACION DE REDIS Y COMANDOS ---------------------
+    -------------- >EN BASH EN WINDOWS< --------------
+Instalacion de redis
+sudo apt-get update
+sudo apt install redis-server
+
+Inicial REDIS en el terminal de linux de windows 10:
+sudo service redis-server start
+
+Para ver que escucha escribir en el terminal de linux:
+redis-cli ping
+
+    -------------- >EN CMD EN WINDOWS< --------------
+	netstat -ano (vemos todos los puertos)
+	netstat -ano | findstr 6379 (buscamos el puerto 6379)
+
+--------------------- CHANNELS ---------------------
+    -------------- >TUTORIAL 1< --------------
+1- Instalar channels en django: pip install channels
+1.1- Instalar redis para el el CHANNEL_LAYERS en el punto 11: pip install channels_redis
+
+2- Configurar channels en la apps instaladas en "NOMBREPROYECTO/settings.py"
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'channels',
+]
+
+3- Crear un fichero llamado "NOMBREPROYECTO/routing.py" dentro de la estructura del proyecto, a la misma altura que "NOMBREPROYECTO/settings.py"
+
+4- configurar "ASGI_APPLICATION" en settings.py
+    ASGI_APPLICATION = 'NOMBREPROYECTO.routing.application'
+
+5- Podemos chequear que esta bien si corremos python manage.py runserver
+
+    -------------- >TUTORIAL 2 y 3< --------------
+
+6- Creamos en el FRONT un socket que apunte a una url: Ejemplo chat lo hacemos en un con javascript en el html
+
+7- Creamos en el BACK un consumidor que acepte las entradas del socket con la url que se ha apuntado en el FRONT
+7.1- Creamos el consumidor en el BACK creando un fichero llamado "NOMBREAPP/consumers.py" a la altura de views.py o models.py
+
+8- Necesitamos decirle al consumidor en que url debe aceptar las entradas del socket del front, para ello creamos un "NOMBREAPP/routing.py"
+y ahi le decimos donde debe consumir
+
+9- Lo siguiente es configurar el "NOMBREAPP/routing.py" en el "NOMBREPROYECTO/routing.py"
+
+10- Aplico python manage.py migrate
+
+11- Configuro en "NOMBREPROYECTO/setting.py" la variable CHANNEL_LAYERS

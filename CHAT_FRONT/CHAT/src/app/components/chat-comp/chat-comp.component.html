@@ -1,0 +1,36 @@
+
+<!-- app.component.html -->
+<h1>
+    Angular 2 Websockets Tutorial
+  </h1>
+  
+
+    <br />
+  <br />
+
+  <h1>
+    Ejemplo de Websockets con angular
+  </h1>
+  <!------------------------------------------------------------------------------->
+  <h2>Recibir mensajes del back al front:</h2>
+  <div *ngFor='let m of message_to_front'>
+     Mensaje back: {{m.message_from_back}}
+  </div>
+  <br />
+  <br />
+   <!------------------------------------------------------------------------------->
+   <h2>Enviar mensajes del front al back:</h2>
+    <form (ngSubmit)="sendMsg()">
+      <input name="author" ngModel required #first="ngModel" [(ngModel)]="message_from_Front.author">  <br />
+      <input name="message_send" ngModel  required #second="ngModel" [(ngModel)]="message_from_Front.message_from_front">  <br />
+      <button>sendMsg</button>
+    </form>
+
+
+  <br />
+  <br />
+    <!------------------------------------------------------------------------------->
+  <label *ngIf="selectedFile">{{selectedFile.name}}</label>
+  <input style="display: none" type="file" (change)="onFileChanged($event)"#fileInput>
+  <button (click)="fileInput.click()">Select File</button>
+  <button *ngIf="selectedFile" (click)="onUpload()">Upload</button>
